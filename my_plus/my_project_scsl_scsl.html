@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>实测实量</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/my_css.css">
+		<link rel="stylesheet" href="../css/my_project_fhys_xz.css" />
+		<style type="text/css">
+			.mui-control-content {
+				bottom: 0px;
+			}
+			
+			.my_table {
+				float: left;
+				text-align: center;
+			}
+			
+			.my_th_weight {
+				font-weight: bold;
+			}
+			
+			.my_td_width30 {
+				width: 30%;
+			}
+			
+			.my_td_width40 {
+				width: 40%;
+			}
+			/*媒体查询，横屏效果*/
+			
+			@media only screen and (orientation:landscape) {
+				.mui-control-content {
+					bottom: 0px;
+				}
+			}
+			
+			.mui-popover {
+				height: 260px;
+			}
+			
+			#middlePopover {
+				min-width: 282px;
+				top: 15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			#cdbzPopover {
+				min-width: 282px;
+				top: 15% !important;
+				margin-top: -150px;
+				left: 50% !important;
+				margin-left: -141px;
+			}
+			
+			.mui-popover .mui-popover-arrow {
+				display: none !important;
+			}
+			
+			#mydiv {
+				width: 315px;
+				height: 420px;
+				margin: auto;
+				border: 1px #C6C6C6 solid;
+				background-size: 100% 100%;
+				/*背景图片充满div*/
+			}
+			
+			.bzcd {
+				margin: 10px;
+				padding-bottom: 10px;
+				height: auto;
+				min-height: 80px;
+				border: 1px #C6C6C6 solid;
+			}
+			
+			.jobDescription {
+				margin: 10px;
+				padding-bottom: 10px;
+				height: auto;
+				min-height: 100px;
+				border: 1px #C6C6C6 solid;
+			}
+			
+			p {
+				font-size: 1em;
+				color: #000000;
+			}
+			
+			span {
+				margin-left: 15px;
+			}
+			
+			.myposition {
+				position: absolute;
+			}
+			
+			.out {
+				margin: 10px;
+				padding-bottom: 10px;
+				height: auto;
+				min-height: 60px;
+				border: 1px #C6C6C6 solid;
+			}
+/*//////////////////////////////////*/
+.accordion {
+ 	width: 100%;
+ 	/*max-width: 360px;*/
+ 	margin: 0px auto 10px;
+ 	/*background: #FFF;*/
+ 	-webkit-border-radius: 4px;
+ 	-moz-border-radius: 4px;
+ 	border-radius: 4px;
+ 	padding-left: 0px;
+ }
+
+.accordion .link {
+	cursor: pointer;
+	display: block;
+	padding: 15px 15px 15px 42px;
+	/*color: #4D4D4D;*/
+	font-size: 14px;
+	font-weight: 700;
+	border-bottom: 1px solid #CCC;
+	position: relative;
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link {
+	border-bottom: 0;
+}
+
+.accordion li i {
+	position: absolute;
+	top: 6px;
+	left: 2px;
+	font-size: 18px;
+	/*color: #595959;*/
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+	right: 2px;
+	left: auto;
+	font-size: 16px;
+}
+
+.accordion li.open .link {
+	/*color: #b63b4d;*/
+}
+
+.accordion li.open i {
+	/*color: #b63b4d;*/
+}
+.accordion li.open i.fa-chevron-down {
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+/**
+ * Submenu
+ -----------------------------*/
+ .submenu {
+ 	display: none;
+ 	/*background: #444359;*/
+ 	font-size: 14px;
+ }
+
+ .submenu li {
+ 	list-style: none;
+ 	height: 40px;
+ 	border-bottom: 1px solid #4b4a5e;
+ }
+
+ .submenu a {
+ 	display: block;
+ 	text-decoration: none;
+ 	/*color: #d9d9d9;*/
+ 	padding: 12px;
+ 	padding-left: 2px;
+ 	-webkit-transition: all 0.25s ease;
+ 	-o-transition: all 0.25s ease;
+ 	transition: all 0.25s ease;
+ }
+
+ .submenu a:hover {
+ 	/*background: #b63b4d;*/
+ 	color: #FFF;
+ }
+		</style>
+
+	</head>
+
+	<body >
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id="my_popover" class="mui-icon mui-icon-bars mui-pull-right"></a>
+			<h1 class="mui-title">实测实量</h1>
+		</header>
+		<div class="mui-content">
+
+			<head class="mui-bar mui-bar-tab">
+				<div style="padding: 10px 10px;">
+					<div id="segmentedControl" class="mui-segmented-control">
+						<a id="a1" class="mui-control-item  mui-active" href="#item1">
+							基本信息
+						</a>
+						<a id="a2" class="mui-control-item" href="#item2">
+							测点布置
+						</a>
+						<a id="a3" class="mui-control-item" href="#item3">
+							实测实量
+						</a>
+						<a id="a" class="mui-control-item" href="#item4">
+							统计分析
+						</a>
+					</div>
+				</div>
+			</head>
+			<div class="mui-content" id="refreshContainer">
+				<!--基本信息  -->
+				<div id="item1" class="mui-control-content  mui-active">
+					<div id="myform" class="mui-content">
+						<form class=" mui-input-group">
+							<div class="mui-input-row">
+								<label>名称：</label>
+								<input type="text" id="mc" placeholder="名称" value="混凝土结构工程">
+							</div>
+							<div class="mui-input-row">
+								<label>检查部位：</label>
+								<input type="text" id="jcbw" placeholder="检查部位" value="A户">
+							</div>
+							<div class="mui-input-row">
+								<label>检查日期：</label>
+								<input type="date" id="jcrq" placeholder="检查日期" value="2018-09-23">
+							</div>
+							<div class="mui-input-row">
+								<label>检查人员：</label>
+								<input type="text" id="jcry" placeholder="检查人员" value="xxx">
+							</div>
+						</form>
+						<form class=" mui-input-group" style="margin-top: 10px;">
+							<div class="mui-input-row">
+								<label>施工班组：</label>
+								<input type="text" id="sgbz" placeholder="施工班组" value="xx">
+							</div>
+							<div class="mui-input-row">
+								<label>组长姓名：</label>
+								<input type="text" id="zzxm" placeholder="组长姓名" value="xxx">
+							</div>
+							<div class="mui-input-row">
+								<label>联系电话：</label>
+								<input type="text" id="lxdh" placeholder="联系电话" value="xxxxxxxxxxx">
+							</div>
+							<div class="mui-input-row">
+								<label>施工日期：</label>
+								<input type="date" id="sgrq" placeholder="施工日期" value="2018-09-22">
+							</div> 
+						</form>
+						<form class="mui-input-group">
+							<div class="jobDescription">
+								<p>工作描述：</p>
+								<input type="text" id="gzms" value="xxxxxxxxxxxxxxxxx" placeholder="工作描述">
+							</div>
+							<div class="mui-button-row my_margintop10px">
+								<!--<button id="fjck" type="button" class="mui-btn mui-btn-primary">附件查看</button>-->
+								<button id="fjscxg" type="button" class="mui-btn mui-btn-primary">附件上传/修改</button>
+								<button id="save" type="button" class="mui-btn mui-btn-primary">保存</button>
+							</div>
+						</form>
+					</div>
+					<div id="uploader" class="my_none">
+						<div id="upload_camera">
+							<form class="mui-input-group">
+								<div class="mui-input-row">
+									<label>附件上传：</label>
+									<input class="upload_camera" type="text" placeholder="点击添加" readonly="readonly">
+								</div>
+								<div style="margin-top: -10px;padding-bottom: 1px;">
+									<ul id="history_yszp" class="dlist" style="text-align:left;">
+										<li id="empty_yszp" class="ditem-empty">无历史记录</li>
+									</ul>
+									<div class="mui-button-row">
+										<button id="clean_yszp" type="button" class="mui-btn mui-btn-primary" onclick="cleanHistory('yszp');">清空记录</button>&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="yszp" type="button" class="mui-btn mui-btn-primary" onclick="upload(this.id,'clean_yszp');">上传附件</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!--基本信息  -->
+
+				<!--测点布置  -->
+				<div id="item2" class="mui-control-content">
+					<div class="mui-content">
+						<div id="scroll" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<div id="mydiv" style="background-image: url(../images/cbd.jpg);">
+									
+								</div>
+								<div class="bzcd">
+									<p>可供布置的测点：</p>
+								</div>
+								<div class="mui-button-row">
+									<button id="xztp" type="button" class="mui-btn mui-btn-primary">选择测点分层</button>
+									<button id="qkbz" type="button" class="mui-btn mui-btn-primary">清空布置</button>
+									<button id="bcbz" type="button" class="mui-btn mui-btn-primary">保存布置</button>
+								</div>
+								<div class="out">
+									操作：
+									<p id="out"></p>
+								</div>
+							</div>
+						</div>
+
+						<div id="cdbzPopover" class="mui-popover">
+							<div class="mui-popover-arrow"></div>
+							<h4 id="title" style="text-align: center;margin-top: 20px;">测点基本信息</h4>
+							<form class="mui-input-group" style="margin-top: 30px;">
+								<div class="mui-input-row">
+									<label> 编号：</label>
+									<input id="kbbhao" type="text" class="" placeholder="" readonly="readonly">
+								</div>
+								<div class="mui-input-row">
+									<label>类型：</label>
+									<input id="kbcdlx" type="text" class="" placeholder="" readonly="readonly">
+								</div>
+								<div class="mui-input-row">
+									<label>实测值：</label>
+									<input id="kbscz" type="text" class="mui-input-clear" placeholder="请输入">
+								</div>
+							</form>
+							<div class="mui-button-row my_margintop10px">
+								<button id="kbgbi" type="button" class="mui-btn mui-btn-primary">关闭</button>
+								<button id="kbqding" type="button" class="mui-btn mui-btn-primary">确定</button>
+							</div>
+						</div>
+						<!--区域滚动  -->
+					</div>
+					<!--区域滚动  -->
+
+				</div>
+				<!--测点布置  -->
+
+				<!--实量实测  -->
+				<div id="item3" class="mui-control-content">
+					<!--区域滚动  -->
+					<div id="scroll" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul id="accordion" class="accordion" style="list-style: none;">
+								<li style="display: flex;justify-content: space-around;padding-top: 10px;">
+									<span style="font-size: 20px;">编号</span>
+									<span style="font-size: 20px;">初测值</span>
+									<span style="font-size: 20px;">复测值</span>
+									<span style="font-size: 20px;">终测值</span>
+								</li>
+								<li>
+									<div class="link" style="padding-left: 20px;"><i class="fa fa-paint-brush"></i>垂直度<i class="fa fa-chevron-down"></i></div>
+									<ul class="submenu mui-table-view" style="padding-left: 0px;"> 
+										<li style="display: flex;justify-content: space-around;padding-top: 10px;">
+											<span style="font-size: 20px;">A1</span>
+											<span style="font-size: 20px;">3</span>
+											<span style="font-size: 20px;">3</span>
+											<span style="font-size: 20px;">3</span>
+										</li>
+										<li style="display: flex;justify-content: space-around;padding-top: 10px;">
+											<span style="font-size: 20px;">A2</span>
+											<span style="font-size: 20px;">4</span>
+											<span style="font-size: 20px;">4</span>
+											<span style="font-size: 20px;">4</span>
+										</li>
+										<li style="display: flex;justify-content: space-around;padding-top: 10px;">
+											<span style="font-size: 20px;">A3</span>
+											<span style="font-size: 20px;">0</span>
+											<span style="font-size: 20px;">2</span>
+											<span style="font-size: 20px;">2</span>
+										</li>
+										<li style="display: flex;justify-content: space-around;padding-top: 10px;">
+											<span style="font-size: 20px;">A4</span>
+											<span style="font-size: 20px; color: red;">6</span>
+											<span style="font-size: 20px;">5</span>
+											<span style="font-size: 20px;">5</span>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<div class="link" style="padding-left: 20px;"><i class="fa fa-code"></i>表面平整度<i class="fa fa-chevron-down"></i></div>
+									<ul class="submenu mui-table-view" style="padding-left: 0px;">
+										<li style="display: flex;justify-content: space-around;padding-top: 10px; ">
+											<span style="font-size: 20px;">A1</span>
+											<span style="font-size: 20px;">3</span>
+											<span style="font-size: 20px;">3</span>
+											<span style="font-size: 20px;">3</span>
+										</li>
+										<li style="display: flex;justify-content: space-around;padding-top: 10px;">
+											<span style="font-size: 20px;">A2</span>
+											<span style="font-size: 20px;">4</span>
+											<span style="font-size: 20px;">4</span>
+											<span style="font-size: 20px;">4</span>
+										</li>
+										<li style="display: flex;justify-content: space-around;padding-top: 10px;">
+											<span style="font-size: 20px;">A3</span>
+											<span style="font-size: 20px;">0</span>
+											<span style="font-size: 20px;">2</span>
+											<span style="font-size: 20px;">2</span>
+										</li>
+										<li style="display: flex;justify-content: space-around;padding-top: 10px;">
+											<span style="font-size: 20px;">A4</span>
+											<span style="font-size: 20px; color: red;">6</span>
+											<span style="font-size: 20px;">5</span>
+											<span style="font-size: 20px;">5</span>
+										</li>
+									</ul>
+								</li>
+								<!--<li>
+									<div class="link"><i class="fa fa-mobile"></i>Diseño responsive<i class="fa fa-chevron-down"></i></div>
+									<ul class="submenu">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+								</li>
+								<li><div class="link"><i class="fa fa-globe"></i>Posicionamiento web<i class="fa fa-chevron-down"></i></div>
+									<ul class="submenu">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+								</li>-->
+							</ul>
+						</div>
+					</div>
+					<!--区域滚动  -->
+					<div id="middlePopover" class="mui-popover">
+						<div class="mui-popover-arrow"></div>
+						<h4 id="title" style="text-align: center;margin-top: 20px;">实测值输入</h4>
+						<form class="mui-input-group" style="margin-top: 30px;">
+							<div class="mui-input-row">
+								<label> 编号：</label>
+								<input id="bhao" type="text" class="" placeholder="" readonly="readonly">
+							</div>
+							<div class="mui-input-row">
+								<label>类型：</label>
+								<input id="cdlx" type="text" class="" placeholder="" readonly="readonly">
+							</div>
+							<div class="mui-input-row">
+								<label>实测值：</label>
+								<input id="scz" type="text" class="mui-input-clear" placeholder="请输入">
+							</div>
+						</form>
+						<div class="mui-button-row my_margintop10px">
+							<button id="scgbi" type="button" class="mui-btn mui-btn-primary">关闭</button>
+							<button id="scqding" type="button" class="mui-btn mui-btn-primary">确定</button>
+						</div>
+
+					</div>
+				</div>
+				<div id="item4" class="mui-control-content">
+					<div id="scroll" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul id="tjfx" class="mui-table-view">
+								<li class="mui-table-view-cell my_th_weight mui-disabled">
+									<div class="my_table my_td_width30">编号</div>
+									<div class="my_table my_td_width40">测点类型</div>
+									<div class="my_table my_td_width30">合格率</div>
+								</li>
+								<li class="mui-table-view-cell my_th_weight mui-disabled">
+									<div class="my_table my_td_width30">综合统计</div>
+									<div class="my_table my_td_width40">----</div>
+									<div id="zhtj" class="my_table my_td_width30"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--实量实测  -->
+		</div>
+		<div id="output">
+			<!--Camera管理摄像头设备，可用于拍摄照片、录制视频文件。      -->
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/immersed.js"></script>
+	<script src="../js/service.js"></script>
+	<script src="../js/my_scsl.js"></script> 
+	<script src="../js/jquery-1.10.2.min.js"></script>
+	<script>
+		$(function() {
+			var Accordion = function(el, multiple) {
+				this.el = el || {};
+				this.multiple = multiple || false;
+		
+				// Variables privadas
+				var links = this.el.find('.link');
+				// Evento
+				links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+			}
+		
+			Accordion.prototype.dropdown = function(e) {
+				var $el = e.data.el;
+					$this = $(this),
+					$next = $this.next();
+		
+				$next.slideToggle();
+				$this.parent().toggleClass('open');
+		
+				if (!e.data.multiple) {
+					$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+				};
+			}	
+		
+			var accordion = new Accordion($('#accordion'), false);
+});
+
+
+//实测实量列表监听
+	mui('.mui-table-view').on('tap', 'span', function() {
+//		bhao.value = this.childNodes[0].innerText;
+//		cdlx.value = this.childNodes[1].innerText;
+//		scz.value = this.childNodes[2].innerText;
+		mui("#middlePopover").popover("toggle");
+	});
+	</script>
+
+</html>
